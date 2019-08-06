@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.fudan.selab.warehouse.DAO.CyberServiceDAO">
+
+    <select id="queryCyberServiceById" resultType="CyberService" parameterType="int">
+        SELECT
+            processId "ProcessDTO.processId",
+            actionList "ProcessDTO.actionList"
+         FROM process
+         WHERE processId = #{processId}
+    </select>
+</mapper>

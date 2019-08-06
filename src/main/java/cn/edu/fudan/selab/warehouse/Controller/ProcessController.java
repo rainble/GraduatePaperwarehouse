@@ -1,5 +1,8 @@
 package cn.edu.fudan.selab.warehouse.Controller;
 
+import cn.edu.fudan.selab.warehouse.Domain.Process;
+import cn.edu.fudan.selab.warehouse.Service.ProcessService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,13 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/process")
 public class ProcessController {
 
+    @Autowired
+    ProcessService processService;
+
     @RequestMapping(value = "queryById", method = RequestMethod.POST)
     @ResponseBody
-    public void queryProcessById(HttpServletRequest request, HttpServletResponse response) {
-
+    public String queryProcessById(HttpServletRequest request, HttpServletResponse response) {
+        int processId = Integer.valueOf(request.getParameter("processId"));
+        Process process = processService.queryProcessById(processId);
+        return process.getActionList().get(0).getAdverbial();
     }
 
-    @RequestMapping(value = "queryById", method = RequestMethod.POST)
+    @RequestMapping(value = "queryByType", method = RequestMethod.POST)
     @ResponseBody
     public void queryProcessByType(HttpServletRequest request, HttpServletResponse response) {
 
