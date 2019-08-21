@@ -30,18 +30,20 @@ public class ProcessService {
         ProcessDTO processDTO = processDAO.queryProcessById(processId);
         logger.info(String.format("processDTO is [ %s ]", processDTO.toString()));
         Process process = new Process();
-        String[] actions = processDTO.getActionList().split(",");
+        String[] actions = processDTO.getActionList().split(";");
         List<Action> actionList = new ArrayList<Action>();
         for (String s : actions) {
             String[] actionComponents = s.split(" ");
             Action action = new Action();
+            action.setType(actionComponents[0]);
             for (Ability ability : Ability.values()) {
-                if (ability.getAbility().equals(actionComponents[0])) {
+                if (ability.getAbility().equals(actionComponents[1])) {
                     action.setPredicate(ability);
                 }
             }
-            action.setObject(actionComponents[1]);
-            action.setAdverbial(actionComponents[2]);
+            action.setObject(actionComponents[2]);
+            action.setAdverbial(actionComponents[3]);
+            action.setParameters(actionComponents[4]);
             actionList.add(action);
         }
         process.setProcessId(processDTO.getProcessId());

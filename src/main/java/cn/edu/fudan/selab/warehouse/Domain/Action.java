@@ -2,17 +2,31 @@ package cn.edu.fudan.selab.warehouse.Domain;
 
 public class Action {
 
+    private String type;
     private Ability predicate;
     private String object;
     private String adverbial;
 
+    //json格式
+    private String parameters;
+
     @Override
     public String toString() {
         return "Action{" +
-                "predicate='" + predicate.toString() + '\'' +
+                "type='" + type + '\'' +
+                ", predicate=" + predicate +
                 ", object='" + object + '\'' +
                 ", adverbial='" + adverbial + '\'' +
+                ", parameters='" + parameters + '\'' +
                 '}';
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setParameters(String parameters) {
+        this.parameters = parameters;
     }
 
     public void setPredicate(Ability predicate) {
@@ -39,4 +53,11 @@ public class Action {
         return adverbial;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getParameters() {
+        return parameters;
+    }
 }
